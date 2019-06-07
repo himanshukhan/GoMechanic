@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function calculate() {
+        let a = document.getElementById("a").value;
+        let b = document.getElementById("b").value;
+
+        let num = 0;
+
+        if (a == 1) {
+          for (j = 1; j <= b; j++) {
+            num += 1;
+          }
+        } else {
+          for (j = 1; j <= b; j++) {
+            for (i = 1; i <= b; i++) {
+              if (coprime(i, j)) {
+                num += 1;
+              }
+            }
+          }
+        }
+        document.getElementById("test").innerHTML = num;
+      }
+      // return gcd of a and b
+      function __gcd($a, $b) {
+        // Everything divides 0
+        if ($a == 0 || $b == 0) return 0;
+
+        // base case
+        if ($a == $b) return $a;
+
+        // a is greater
+        if ($a > $b) return __gcd($a - $b, $b);
+
+        return __gcd($a, $b - $a);
+      }
+
+      // two numbers are co-prime or not
+      function coprime($a, $b) {
+        if (__gcd($a, $b) == 1) return true;
+        else return false;
+      }
+    </script>
+  </head>
+  <body onload="calculate()">
+    Input for A <input type="text" id="a" value="2" /><br /><br />
+    Input for B <input type="text" id="b" value="3" /><br />
+    <br />
+    <br />
+
+    <button type="button" onclick="calculate()">
+      Calculate Path without bombed
+    </button>
+
+    <h1>Result: <span id="test"></span></h1>
+  </body>
+</html>
